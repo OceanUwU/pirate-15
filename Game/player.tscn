@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfebngjord2bk"]
+
+[ext_resource type="Script" path="res://Game/player.gd" id="1_1jtnr"]
+[ext_resource type="Texture2D" uid="uid://cxesiag4t4rsk" path="res://icon.svg" id="2_d4n8c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5y53"]
+size = Vector2(26, 26)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_1jtnr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_d4n8c")
+centered = false
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+offset_left = -13.0
+offset_top = 22.0
+offset_right = 47.0
+offset_bottom = 62.0
+bbcode_enabled = true
+text = "Player"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(13, 13)
+shape = SubResource("RectangleShape2D_u5y53")

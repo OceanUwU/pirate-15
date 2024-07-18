@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://cccjrqukyibtr"]
+
+[ext_resource type="Texture2D" uid="uid://5qj388frquou" path="res://Sprites/tileset.png" id="1_jwld0"]
+[ext_resource type="PackedScene" uid="uid://w7e30r7v7a2p" path="res://Game/guard.tscn" id="2_1yid4"]
+[ext_resource type="PackedScene" uid="uid://bfebngjord2bk" path="res://Game/player.tscn" id="3_06frq"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bdeoi"]
+texture = ExtResource("1_jwld0")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+1:1/0 = 0
+0:1/0 = 0
+2:1/0 = 0
+2:2/0 = 0
+1:2/0 = 0
+0:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_gr0tr"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_bdeoi")
+
+[node name="Prototype1" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_gr0tr")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 65536, 0, 65536, 65536, 0, 131072, 65536, 0, 65537, 65536, 0, 1, 65536, 0, 131073, 65536, 0, 2, 0, 1, 65538, 0, 1, 131074, 0, 1, 131075, 131072, 0, 65539, 131072, 0, 3, 131072, 0, 196610, 65536, 0, 196609, 65536, 0, 196608, 65536, 0, 196611, 65536, 0, 4, 131072, 0, 65540, 65536, 0, 131076, 65536, 0, 196612, 65536, 0, 262148, 65536, 0, 262147, 65536, 0, 327683, 65536, 0, 327682, 65536, 0, 327681, 65536, 0, 262145, 65536, 0, 262146, 65536, 0, 262144, 65536, 0, 327680, 65536, 0, 327684, 65536, 0, 262149, 65536, 0, 196613, 65536, 0, 131077, 0, 1, 65541, 0, 1, 5, 0, 1, 327685, 65536, 0, 196614, 65536, 0, 131078, 131072, 0, 65542, 131072, 0, 6, 131072, 0, 262150, 65536, 0, 327686, 65536, 0, 196615, 131072, 0, 131079, 131072, 0, 65543, 131072, 0, 262151, 65536, 0, 327687, 65536, 0, 262152, 131072, 0, 196616, 131072, 0, 131080, 131072, 0, 65544, 131072, 0, 8, 131072, 0, 327688, 131072, 0, 196617, 131072, 0, 131081, 131072, 0, 65545, 131072, 0, 9, 131072, 0, 262153, 131072, 0, 327689, 131072, 0, 7, 131072, 0)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 233.0
+offset_top = 24.0
+offset_right = 298.0
+offset_bottom = 51.0
+text = "Shadow"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 29.0
+offset_top = 105.0
+offset_right = 94.0
+offset_bottom = 132.0
+bbcode_enabled = true
+text = "[color=black]Light"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+visible = false
+offset_left = 118.0
+offset_top = 104.0
+offset_right = 183.0
+offset_bottom = 131.0
+bbcode_enabled = true
+text = "[color=black]Guard"
+
+[node name="Guard" parent="." instance=ExtResource("2_1yid4")]
+position = Vector2(80, 113)
+
+[node name="Player" parent="." instance=ExtResource("3_06frq")]
+position = Vector2(131, 100)
