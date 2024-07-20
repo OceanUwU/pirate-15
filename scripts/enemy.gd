@@ -1,4 +1,4 @@
-extends Path2D
+class_name Enemy extends Path2D
 
 enum Direction { UP, UP_RIGHT, DOWN, DOWN_RIGHT }
 
@@ -31,4 +31,3 @@ func set_dir(angle: float) -> void:
 	
 	if direction_before != direction:
 		animation_player.play(action + "_" + direction)
- 
