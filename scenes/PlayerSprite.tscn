@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://cdf6ykr72br6j"]
+
+[ext_resource type="Script" path="res://scenes/PlayerSprite.gd" id="1_i5vcg"]
+[ext_resource type="Texture2D" uid="uid://q55rauqjhpsb" path="res://assets/img/crow placeholder.PNG" id="2_oqfgb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vgm8"]
+size = Vector2(92, 91)
+
+[sub_resource type="Animation" id="Animation_8jvdm"]
+resource_name = "new_animation"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_nxyth"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2itcy"]
+_data = {
+"RESET": SubResource("Animation_nxyth"),
+"new_animation": SubResource("Animation_8jvdm")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ruse"]
+animation = &"new_animation"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_l3k5j"]
+states/End/position = Vector2(593, 100)
+states/Start/position = Vector2(371, 100)
+states/new_animation/node = SubResource("AnimationNodeAnimation_5ruse")
+states/new_animation/position = Vector2(485, 97)
+
+[node name="PlayerSprite" type="CharacterBody2D"]
+script = ExtResource("1_i5vcg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_oqfgb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 10.5)
+shape = SubResource("RectangleShape2D_3vgm8")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+deterministic = false
+libraries = {
+"": SubResource("AnimationLibrary_2itcy")
+}
+tree_root = SubResource("AnimationNodeStateMachine_l3k5j")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2itcy")
+}
