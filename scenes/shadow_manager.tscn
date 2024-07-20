@@ -2,9 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/shadow_manager.gd" id="1_bqx86"]
 
-[node name="ShadowManager" type="Node2D" node_paths=PackedStringArray("shadow_arr")]
+[node name="ShadowManager" type="Node2D"]
 script = ExtResource("1_bqx86")
-shadow_arr = [NodePath("Shadow/CollisionPolygon2D")]
 
 [node name="Shadow" type="Area2D" parent="."]
 

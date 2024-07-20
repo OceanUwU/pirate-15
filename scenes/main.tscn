@@ -1,7 +1,77 @@
-[gd_scene load_steps=4 format=3 uid="uid://cr4uc5uqiebxb"]
+[gd_scene load_steps=7 format=3 uid="uid://cr4uc5uqiebxb"]
 
 [ext_resource type="PackedScene" uid="uid://b561e3wuyevxd" path="res://scenes/enemy.tscn" id="1_o5a2t"]
-[ext_resource type="PackedScene" uid="uid://b6mhcidscnl1p" path="res://scenes/shadow_manager.tscn" id="2_qx7t2"]
+[ext_resource type="Texture2D" uid="uid://iv43on74f2r" path="res://Light.png" id="3_gfj6h"]
+[ext_resource type="Texture2D" uid="uid://cxesiag4t4rsk" path="res://icon.svg" id="4_iihrg"]
+
+[sub_resource type="GDScript" id="GDScript_geevs"]
+script/source = "extends Node2D
+
+# exports for editor
+@export var fog: Sprite2D
+@export var fogWidth = 1000
+@export var fogHeight = 1000
+@export var LightTexture: CompressedTexture2D
+@export var lightWidth = 300
+@export var lightHeight = 300
+@export var Player: CharacterBody2D
+@export var debounce_time = 0.01
+
+# debounce counter helper
+var time_since_last_fog_update = 0.0
+
+var fogImage: Image
+var lightImage: Image
+var light_offset: Vector2
+var fogTexture: ImageTexture
+var light_rect: Rect2
+
+# here we cache things when Node2D is ready
+func _ready():
+  # get Image from CompressedTexture2D and resize it
+	lightImage = LightTexture.get_image()
+	lightImage.resize(lightWidth, lightHeight)
+
+  # get center
+	light_offset = Vector2(lightWidth/2, lightHeight/2)
+
+  # create black canvas (fog)
+	#fogImage = Image.create(fogWidth, fogHeight, false, Image.FORMAT_RGBA8)
+	#fogImage.fill(Color(0.662745, 0.662745, 0.662745, 1))
+	#fogTexture = ImageTexture.create_from_image(fogImage)
+	#fog.texture = fogTexture
+
+  # get Rect2 from our Image to use it with .blend_rect() later
+	light_rect = Rect2(Vector2.ZERO, lightImage.get_size())
+
+  # update fog once or player will be under fog until you start move
+	update_fog(get_local_mouse_position())
+
+# update our fog
+func update_fog(pos):
+	fogImage = Image.create(fogWidth, fogHeight, false, Image.FORMAT_RGBA8)
+	fogImage.fill(Color(0.3, 0.3, 0.3, 1))
+	fogTexture = ImageTexture.create_from_image(fogImage)
+	fog.texture = fogTexture
+	fogImage.blend_rect(lightImage, light_rect, pos - light_offset)
+	fogTexture.update(fogImage)
+
+# main render loop. Here we don't need to call update every iteration.
+# So we are using debounce here to execute code each \"debounce_time\"
+# If debounce us ready, now we can check is character moving. And update fog if it's moving.
+# Here I don't use single if block for debounce + player input because we don't need to check input
+# if debounce is not ready. 
+#func _process(delta):
+	#time_since_last_fog_update += delta
+	#if (time_since_last_fog_update >= debounce_time):
+		#var player_input = Player.get_input()
+		#if player_input.length() > 0:
+			#time_since_last_fog_update = 0.0
+			#update_fog(Player.position)
+
+func _input(event):
+	update_fog(get_local_mouse_position())
+"
 
 [sub_resource type="Curve2D" id="Curve2D_6y1us"]
 _data = {
@@ -9,14 +79,28 @@ _data = {
 }
 point_count = 7
 
-[node name="Main" type="Node2D"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wgypv"]
+blend_mode = 3
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("fog", "Player")]
+script = SubResource("GDScript_geevs")
+fog = NodePath("Fog")
+LightTexture = ExtResource("3_gfj6h")
+Player = NodePath("Enemy/PathFollow2D/CharacterBody2D")
 
 [node name="Enemy" parent="." instance=ExtResource("1_o5a2t")]
 curve = SubResource("Curve2D_6y1us")
 
-[node name="ShadowManager" parent="." instance=ExtResource("2_qx7t2")]
+[node name="PathFollow2D" parent="Enemy" index="0"]
+position = Vector2(376, 340)
 
-[node name="CollisionPolygon2D" parent="ShadowManager/Shadow" index="0"]
-polygon = PackedVector2Array(283, 203, 558, 167, 600, 270, 292, 321)
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(136, 133)
+texture = ExtResource("4_iihrg")
 
-[editable path="ShadowManager"]
+[node name="Fog" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_wgypv")
+texture = ExtResource("3_gfj6h")
+centered = false
+
+[editable path="Enemy"]
