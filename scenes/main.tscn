@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cr4uc5uqiebxb"]
+[gd_scene load_steps=4 format=3 uid="uid://cr4uc5uqiebxb"]
 
 [ext_resource type="PackedScene" uid="uid://b561e3wuyevxd" path="res://scenes/enemy.tscn" id="1_o5a2t"]
+[ext_resource type="PackedScene" uid="uid://b6mhcidscnl1p" path="res://scenes/shadow_manager.tscn" id="2_qx7t2"]
 
 [sub_resource type="Curve2D" id="Curve2D_6y1us"]
 _data = {
@@ -12,3 +13,10 @@ point_count = 7
 
 [node name="Enemy" parent="." instance=ExtResource("1_o5a2t")]
 curve = SubResource("Curve2D_6y1us")
+
+[node name="ShadowManager" parent="." instance=ExtResource("2_qx7t2")]
+
+[node name="CollisionPolygon2D" parent="ShadowManager/Shadow" index="0"]
+polygon = PackedVector2Array(283, 203, 558, 167, 600, 270, 292, 321)
+
+[editable path="ShadowManager"]
