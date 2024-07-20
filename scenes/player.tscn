@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cdf6ykr72br6j"]
 
-[ext_resource type="Script" path="res://scenes/PlayerSprite.gd" id="1_i5vcg"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_i5vcg"]
 [ext_resource type="Texture2D" uid="uid://q55rauqjhpsb" path="res://assets/img/crow placeholder.PNG" id="2_oqfgb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3vgm8"]
