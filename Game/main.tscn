@@ -5,3 +5,11 @@
 [node name="Main" type="Node2D"]
 
 [node name="Prototype1" parent="." instance=ExtResource("1_p250j")]
+
+[node name="Guard" parent="Prototype1" index="4"]
+position = Vector2(128, 96)
+
+[node name="Player" parent="Prototype1" index="5"]
+position = Vector2(99, 3)
+
+[editable path="Prototype1"]
