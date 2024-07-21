@@ -4,11 +4,3 @@
 
 [node name="ShadowManager" type="Node2D"]
 script = ExtResource("1_bqx86")
-
-[node name="Shadow" type="Area2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Shadow"]
-polygon = PackedVector2Array(19, 37, 13, 162, 202, 127, 203, 59)
-
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0.137255, 0.137255, 0.137255, 1)
