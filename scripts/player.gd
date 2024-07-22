@@ -29,8 +29,6 @@ func update_animation_parameter(move_input : Vector2):
 		
 func pick_move_state():
 	if(velocity != Vector2.ZERO):
-		print("?????")
 		state_machine.travel("walk")
 	else:
-		print("should be idle")
 		state_machine.travel("idle")
