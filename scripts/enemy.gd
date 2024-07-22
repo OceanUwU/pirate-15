@@ -58,11 +58,11 @@ func duplicate_raycast():
 	var new_raycast = raycast.duplicate()
 	new_raycast.position = raycast.position
 	new_raycast.rotation = deg_to_rad(angle)
-	add_child(new_raycast)
+	character.add_child(new_raycast)
 	raycast_arr.append(new_raycast)
 
 func duplicate_line():
 	var new_line = line.duplicate()
 	new_line.position = line.position
 	new_line.rotation = deg_to_rad(angle)
-	add_child(new_line)
+	character.add_child(new_line)
