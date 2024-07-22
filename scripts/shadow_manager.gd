@@ -7,7 +7,7 @@ extends Node2D
 @export var LightTexture: CompressedTexture2D
 @export var lightWidth = 300
 @export var lightHeight = 300
-@export var enemy_arr: Array[CharacterBody2D]
+@export var light_arr: Array[Area2D]
 @export var debounce_time = 0.01
 
 # debounce counter helper
@@ -41,8 +41,8 @@ func _process(delta):
 	time_since_last_fog_update += delta
 	if time_since_last_fog_update >= debounce_time:
 		create_fog()
-		for i in range(enemy_arr.size()):
-			create_light(enemy_arr[i].global_position)
+		for i in range(light_arr.size()):
+			create_light(light_arr[i].global_position)
 		time_since_last_fog_update = 0.0
 		fogTexture = ImageTexture.create_from_image(fogImage)
 		fog.texture = fogTexture

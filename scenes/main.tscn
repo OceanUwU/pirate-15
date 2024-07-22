@@ -18,16 +18,19 @@ blend_mode = 3
 [node name="Main" type="Node2D"]
 script = ExtResource("1_1i8d8")
 
-[node name="ShadowManager" parent="." node_paths=PackedStringArray("fog", "enemy_arr") instance=ExtResource("4_edccw")]
+[node name="ShadowManager" parent="." node_paths=PackedStringArray("fog", "light_arr") instance=ExtResource("4_edccw")]
 fog = NodePath("../Fog")
 LightTexture = ExtResource("3_gfj6h")
-enemy_arr = [NodePath("../Enemy/PathFollow2D/CharacterBody2D")]
+light_arr = [NodePath("../Enemy/PathFollow2D/LightArea"), NodePath("../Enemy2/PathFollow2D/LightArea")]
 
 [node name="Enemy" parent="." instance=ExtResource("1_o5a2t")]
 curve = SubResource("Curve2D_6y1us")
 
 [node name="PathFollow2D" parent="Enemy" index="0"]
 position = Vector2(376, 340)
+
+[node name="Enemy2" parent="." instance=ExtResource("1_o5a2t")]
+position = Vector2(716, 204)
 
 [node name="ShadedObject" type="Sprite2D" parent="."]
 texture = ExtResource("4_iihrg")
@@ -39,3 +42,4 @@ texture = ExtResource("3_gfj6h")
 centered = false
 
 [editable path="Enemy"]
+[editable path="Enemy2"]
