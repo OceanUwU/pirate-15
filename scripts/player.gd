@@ -22,12 +22,15 @@ func _physics_process(_delta):
 	
 
 func update_animation_parameter(move_input : Vector2):
+
 	if(move_input != Vector2.ZERO):
-		animation_tree.set("parameters/walk_forward/blend_position", move_input)
+		animation_tree.set("parameters/walk/blend_position", move_input)
 		animation_tree.set("parameters/idle/blend_position", move_input)
 		
 func pick_move_state():
 	if(velocity != Vector2.ZERO):
-		state_machine.travel("walk_forward")
+		print("?????")
+		state_machine.travel("walk")
 	else:
+		print("should be idle")
 		state_machine.travel("idle")
