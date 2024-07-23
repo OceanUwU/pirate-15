@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cr4uc5uqiebxb"]
+[gd_scene load_steps=4 format=3 uid="uid://cr4uc5uqiebxb"]
 
 [ext_resource type="PackedScene" uid="uid://b561e3wuyevxd" path="res://scenes/enemy.tscn" id="1_o5a2t"]
+[ext_resource type="PackedScene" uid="uid://cdf6ykr72br6j" path="res://scenes/player.tscn" id="2_eywjs"]
 
 [sub_resource type="Curve2D" id="Curve2D_6y1us"]
 _data = {
@@ -12,3 +13,6 @@ point_count = 7
 
 [node name="Enemy" parent="." instance=ExtResource("1_o5a2t")]
 curve = SubResource("Curve2D_6y1us")
+
+[node name="PlayerSprite" parent="." instance=ExtResource("2_eywjs")]
+position = Vector2(684, 304)
