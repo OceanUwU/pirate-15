@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://3bk8pvbldhqd" path="res://assets/img/placeholder-wizard.png" id="1_48l1d"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_pmwgf"]
-[ext_resource type="PackedScene" path="res://scenes/light_area.tscn" id="3_kapih"]
+[ext_resource type="PackedScene" uid="uid://cjl0kk0rhoohw" path="res://scenes/light_area.tscn" id="3_kapih"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vy571"]
 atlas = ExtResource("1_48l1d")
@@ -346,9 +346,11 @@ libraries = {
 }
 
 [node name="RayCast2D" type="RayCast2D" parent="PathFollow2D/CharacterBody2D"]
+target_position = Vector2(0, 240)
 
 [node name="Line2D" type="Line2D" parent="PathFollow2D/CharacterBody2D"]
-points = PackedVector2Array(0, 0, 0, 200)
+points = PackedVector2Array(0, 0, 0, 234)
+width = 8.0
 
 [node name="LightArea" parent="PathFollow2D" instance=ExtResource("3_kapih")]
 

@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_1i8d8"]
 [ext_resource type="PackedScene" uid="uid://b561e3wuyevxd" path="res://scenes/enemy.tscn" id="1_o5a2t"]
-[ext_resource type="Texture2D" path="res://assets/img/Light.png" id="3_gfj6h"]
-[ext_resource type="PackedScene" path="res://scenes/shadow_manager.tscn" id="4_edccw"]
-[ext_resource type="Texture2D" uid="uid://cxesiag4t4rsk" path="res://icon.svg" id="4_iihrg"]
+[ext_resource type="Texture2D" uid="uid://iv43on74f2r" path="res://assets/img/Light.png" id="3_gfj6h"]
+[ext_resource type="PackedScene" uid="uid://b6mhcidscnl1p" path="res://scenes/shadow_manager.tscn" id="4_edccw"]
+[ext_resource type="PackedScene" uid="uid://cdf6ykr72br6j" path="res://scenes/player.tscn" id="6_q7otw"]
 
 [sub_resource type="Curve2D" id="Curve2D_6y1us"]
 _data = {
@@ -32,14 +32,13 @@ position = Vector2(376, 340)
 [node name="Enemy2" parent="." instance=ExtResource("1_o5a2t")]
 position = Vector2(716, 204)
 
-[node name="ShadedObject" type="Sprite2D" parent="."]
-texture = ExtResource("4_iihrg")
-centered = false
-
 [node name="Fog" type="Sprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_wgypv")
 texture = ExtResource("3_gfj6h")
 centered = false
+
+[node name="PlayerSprite" parent="." instance=ExtResource("6_q7otw")]
+position = Vector2(165, 126)
 
 [editable path="Enemy"]
 [editable path="Enemy2"]
