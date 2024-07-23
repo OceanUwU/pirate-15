@@ -332,6 +332,7 @@ line = NodePath("PathFollow2D/CharacterBody2D/Line2D")
 rotates = false
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="PathFollow2D"]
+collision_layer = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PathFollow2D/CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_ooxq3")
@@ -353,6 +354,8 @@ points = PackedVector2Array(0, 0, 0, 234)
 width = 8.0
 
 [node name="LightArea" parent="PathFollow2D" instance=ExtResource("3_kapih")]
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/LightArea"]
 shape = SubResource("CircleShape2D_v4f1p")

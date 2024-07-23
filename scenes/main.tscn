@@ -32,13 +32,13 @@ position = Vector2(376, 340)
 [node name="Enemy2" parent="." instance=ExtResource("1_o5a2t")]
 position = Vector2(716, 204)
 
+[node name="PlayerSprite" parent="." instance=ExtResource("6_q7otw")]
+position = Vector2(165, 126)
+
 [node name="Fog" type="Sprite2D" parent="."]
 material = SubResource("CanvasItemMaterial_wgypv")
 texture = ExtResource("3_gfj6h")
 centered = false
-
-[node name="PlayerSprite" parent="." instance=ExtResource("6_q7otw")]
-position = Vector2(165, 126)
 
 [editable path="Enemy"]
 [editable path="Enemy2"]
