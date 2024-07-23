@@ -1,7 +1,8 @@
-[gd_scene load_steps=24 format=3 uid="uid://b561e3wuyevxd"]
+[gd_scene load_steps=26 format=3 uid="uid://b561e3wuyevxd"]
 
 [ext_resource type="Texture2D" uid="uid://3bk8pvbldhqd" path="res://assets/img/placeholder-wizard.png" id="1_48l1d"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_pmwgf"]
+[ext_resource type="PackedScene" uid="uid://cjl0kk0rhoohw" path="res://scenes/light_area.tscn" id="3_kapih"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vy571"]
 atlas = ExtResource("1_48l1d")
@@ -314,22 +315,28 @@ _data = {
 "walk_up_right": SubResource("Animation_or74t")
 }
 
-[node name="Enemy" type="Path2D" node_paths=PackedStringArray("character", "sprite", "path_follow", "animation_player")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_v4f1p"]
+radius = 200.0
+
+[node name="Enemy" type="Path2D" node_paths=PackedStringArray("character", "sprite", "path_follow", "animation_player", "raycast", "line")]
 script = ExtResource("1_pmwgf")
 character = NodePath("PathFollow2D/CharacterBody2D")
 sprite = NodePath("PathFollow2D/CharacterBody2D/AnimatedSprite2D")
 path_follow = NodePath("PathFollow2D")
 animation_player = NodePath("PathFollow2D/CharacterBody2D/AnimationPlayer")
 roam_speed = 80.0
+raycast = NodePath("PathFollow2D/CharacterBody2D/RayCast2D")
+line = NodePath("PathFollow2D/CharacterBody2D/Line2D")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
 rotates = false
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="PathFollow2D"]
+collision_layer = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PathFollow2D/CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_ooxq3")
-animation = &"walk_up_left"
+animation = &"walk_down"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/CharacterBody2D"]
 shape = SubResource("CapsuleShape2D_fl47w")
@@ -338,3 +345,17 @@ shape = SubResource("CapsuleShape2D_fl47w")
 libraries = {
 "": SubResource("AnimationLibrary_34t12")
 }
+
+[node name="RayCast2D" type="RayCast2D" parent="PathFollow2D/CharacterBody2D"]
+target_position = Vector2(0, 240)
+
+[node name="Line2D" type="Line2D" parent="PathFollow2D/CharacterBody2D"]
+points = PackedVector2Array(0, 0, 0, 234)
+width = 8.0
+
+[node name="LightArea" parent="PathFollow2D" instance=ExtResource("3_kapih")]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/LightArea"]
+shape = SubResource("CircleShape2D_v4f1p")

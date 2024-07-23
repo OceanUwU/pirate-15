@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6mhcidscnl1p"]
+
+[ext_resource type="Script" path="res://scripts/shadow_manager.gd" id="1_bqx86"]
+
+[node name="ShadowManager" type="Node2D"]
+script = ExtResource("1_bqx86")
