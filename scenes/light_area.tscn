@@ -1,3 +1,9 @@
-[gd_scene format=3 uid="uid://cjl0kk0rhoohw"]
+[gd_scene load_steps=2 format=3 uid="uid://cjl0kk0rhoohw"]
+
+[ext_resource type="Script" path="res://scenes/light_area.gd" id="1_25xx4"]
 
 [node name="LightArea" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_25xx4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

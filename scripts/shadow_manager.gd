@@ -20,18 +20,13 @@ var fogTexture: ImageTexture
 var light_rect: Rect2
 
 func _ready():
-	# get Image from CompressedTexture2D and resize it
 	lightImage = LightTexture.get_image()
-	lightImage.resize(lightWidth, lightHeight)
 
-	# get center
-	light_offset = Vector2(lightWidth / 2, lightHeight / 2)
-
-	# get Rect2 from our Image to use it with .blend_rect() later
+func create_light(shape):
+	lightImage.resize(shape.size, shape.size)
+	light_offset = Vector2(shape.size / 2, shape.size / 2)
 	light_rect = Rect2(Vector2.ZERO, lightImage.get_size())
-
-func create_light(pos):
-	fogImage.blend_rect(lightImage, light_rect, pos - light_offset)
+	fogImage.blend_rect(lightImage, light_rect, shape.global_position - light_offset)
 
 func create_fog():
 	fogImage = Image.create(fogWidth, fogHeight, false, Image.FORMAT_RGBA8)
@@ -42,7 +37,7 @@ func _process(delta):
 	if time_since_last_fog_update >= debounce_time:
 		create_fog()
 		for i in range(light_arr.size()):
-			create_light(light_arr[i].global_position)
+			create_light(light_arr[i])
 		time_since_last_fog_update = 0.0
 		fogTexture = ImageTexture.create_from_image(fogImage)
 		fog.texture = fogTexture

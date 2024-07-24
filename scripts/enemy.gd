@@ -33,7 +33,8 @@ func _physics_process(delta: float) -> void:
 		set_dir(path_pos_before.angle_to_point(path_follow.position))
 	for i in range(raycast_arr.size()):
 		if raycast_arr[i].is_colliding():
-			print(i)
+			#print(i)
+			pass
 
 func set_dir(angle: float) -> void:
 	change_raycast_rotation(angle) #TEMP SOLUTION (WHEN 8 DIRECTION ADDED WILL CHANGE)
