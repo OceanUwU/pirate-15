@@ -318,7 +318,7 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_v4f1p"]
 radius = 200.0
 
-[node name="Enemy" type="Path2D" node_paths=PackedStringArray("character", "sprite", "path_follow", "animation_player", "raycast", "line")]
+[node name="Enemy" type="Path2D" node_paths=PackedStringArray("character", "sprite", "path_follow", "animation_player", "raycast", "line", "light_area")]
 script = ExtResource("1_pmwgf")
 character = NodePath("PathFollow2D/CharacterBody2D")
 sprite = NodePath("PathFollow2D/CharacterBody2D/AnimatedSprite2D")
@@ -327,6 +327,7 @@ animation_player = NodePath("PathFollow2D/CharacterBody2D/AnimationPlayer")
 roam_speed = 80.0
 raycast = NodePath("PathFollow2D/CharacterBody2D/RayCast2D")
 line = NodePath("PathFollow2D/CharacterBody2D/Line2D")
+light_area = NodePath("PathFollow2D/LightArea")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
 rotates = false
@@ -358,3 +359,7 @@ collision_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/LightArea"]
 shape = SubResource("CircleShape2D_v4f1p")
+
+[node name="AttackTimer" type="Timer" parent="PathFollow2D"]
+
+[connection signal="timeout" from="PathFollow2D/AttackTimer" to="." method="_on_attack_timer_timeout"]

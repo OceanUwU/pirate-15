@@ -2,8 +2,8 @@ extends Node2D
 
 # exports for editor
 @export var fog: Sprite2D
-@export var fogWidth = 1280
-@export var fogHeight = 720
+@export var fogWidth = 2500
+@export var fogHeight = 1500
 @export var LightTexture: CompressedTexture2D
 @export var lightWidth = 300
 @export var lightHeight = 300

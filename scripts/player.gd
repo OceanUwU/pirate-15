@@ -5,6 +5,9 @@ extends CharacterBody2D
 
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
+@onready var light_area = preload("res://scenes/light_area.tscn")
+
+var in_light_arr = []
 
 func _ready():
 	update_animation_parameter(starting_direction)
@@ -33,3 +36,15 @@ func pick_move_state():
 		state_machine.travel("walk")
 	else:
 		state_machine.travel("idle")
+
+
+func _on_light_sense_area_entered(area):
+	print(area)
+	in_light_arr.append(area)
+
+func _on_light_sense_area_exited(area):
+	print("out")
+	in_light_arr.remove_at(in_light_arr.find(area))
+
+func _on_hurtbox_body_entered(body):
+	pass # Replace with function body.
