@@ -1,11 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://cdf6ykr72br6j"]
+[gd_scene load_steps=27 format=3 uid="uid://cdf6ykr72br6j"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_i5vcg"]
 [ext_resource type="Texture2D" uid="uid://d3lkxpieh0h0i" path="res://assets/img/crow_walk_right.png" id="2_3cupo"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n8xs5"]
-radius = 36.5
-height = 73.0
+radius = 18.0
+height = 36.0
 
 [sub_resource type="Animation" id="Animation_nxyth"]
 loop_mode = 1
@@ -165,11 +165,18 @@ states/walk/position = Vector2(569.639, 149)
 transitions = ["walk", "idle", SubResource("AnimationNodeStateMachineTransition_by270"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_8mi8c"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_bovm0")]
 graph_offset = Vector2(32.6389, 0)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_74xg4"]
+radius = 13.2821
+height = 58.3351
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_edan8"]
+radius = 17.0
+
 [node name="PlayerSprite" type="CharacterBody2D"]
 script = ExtResource("1_i5vcg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.05, 0.05)
 texture = ExtResource("2_3cupo")
 hframes = 5
 
@@ -191,3 +198,24 @@ parameters/walk/blend_position = Vector2(0, 0.0132158)
 libraries = {
 "": SubResource("AnimationLibrary_2itcy")
 }
+
+[node name="LightSense" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LightSense"]
+position = Vector2(4, 4)
+rotation = 0.755702
+shape = SubResource("CapsuleShape2D_74xg4")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(1, 8)
+shape = SubResource("CircleShape2D_edan8")
+
+[connection signal="area_entered" from="LightSense" to="." method="_on_light_sense_area_entered"]
+[connection signal="area_exited" from="LightSense" to="." method="_on_light_sense_area_exited"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
