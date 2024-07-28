@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://da5be18eeeliw"]
 
-[ext_resource type="Script" path="res://scenes/potion.gd" id="1_8a5ff"]
+[ext_resource type="Script" path="res://scripts/potion.gd" id="1_8a5ff"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sqluk"]
 radius = 30.0

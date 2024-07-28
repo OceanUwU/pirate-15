@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://ceyscalmis522"]
+
+[node name="Prop" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

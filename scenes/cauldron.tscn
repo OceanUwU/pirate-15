@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbuj3u0rjhjwp"]
+
+[ext_resource type="Texture2D" uid="uid://bday7463yfvbx" path="res://assets/img/Untitled_Artwork-4.png" id="1_sjnnw"]
+
+[node name="Cauldron" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_sjnnw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

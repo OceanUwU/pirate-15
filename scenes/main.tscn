@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cr4uc5uqiebxb"]
+[gd_scene load_steps=11 format=3 uid="uid://cr4uc5uqiebxb"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_1i8d8"]
 [ext_resource type="PackedScene" uid="uid://b561e3wuyevxd" path="res://scenes/enemy.tscn" id="1_o5a2t"]
 [ext_resource type="Texture2D" uid="uid://iv43on74f2r" path="res://assets/img/Light.png" id="3_gfj6h"]
 [ext_resource type="PackedScene" uid="uid://b6mhcidscnl1p" path="res://scenes/shadow_manager.tscn" id="4_edccw"]
-[ext_resource type="Texture2D" uid="uid://c0kc0khl518jb" path="res://assets/img/table.png" id="6_dlyff"]
 [ext_resource type="PackedScene" uid="uid://cdf6ykr72br6j" path="res://scenes/player.tscn" id="6_q7otw"]
 [ext_resource type="PackedScene" uid="uid://jhtn56plofc2" path="res://scenes/tile_map.tscn" id="7_lrm11"]
 [ext_resource type="PackedScene" uid="uid://cjl0kk0rhoohw" path="res://scenes/light_area.tscn" id="8_plrqj"]
@@ -33,11 +32,6 @@ layer_0/tile_data = PackedInt32Array(0, 131073, 4, 65536, 1, 2, 131072, 1, 2, 19
 fog = NodePath("../Fog")
 LightTexture = ExtResource("3_gfj6h")
 light_arr = [NodePath("../Enemy/PathFollow2D/CharacterBody2D/LightArea"), NodePath("../Enemy2/PathFollow2D/CharacterBody2D/LightArea"), NodePath("../LightArea"), NodePath("../LightArea2"), NodePath("../Player/LightArea")]
-
-[node name="Table" type="Sprite2D" parent="."]
-position = Vector2(514, 687)
-scale = Vector2(0.05, 0.05)
-texture = ExtResource("6_dlyff")
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_o5a2t")]
 curve = SubResource("Curve2D_6y1us")
