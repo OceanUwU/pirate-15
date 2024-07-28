@@ -1,10 +1,8 @@
 extends Area2D
 
-@export var collision_shape:CollisionShape2D
-
-var size:int
+@onready var collision_shape = $CollisionShape2D
+@export var size: int = 400
 
 
 func _ready():
-	size = collision_shape.shape.radius*2
-	print(size)
+	collision_shape.shape.radius = size/2

@@ -18,13 +18,15 @@ var lightImage: Image
 var light_offset: Vector2
 var fogTexture: ImageTexture
 var light_rect: Rect2
+var light_diff = 20
 
 func _ready():
 	lightImage = LightTexture.get_image()
 
 func create_light(shape):
-	lightImage.resize(shape.size, shape.size)
-	light_offset = Vector2(shape.size / 2, shape.size / 2)
+	var light_size = shape.size + light_diff
+	lightImage.resize(light_size, light_size)
+	light_offset = Vector2(light_size / 2, light_size / 2)
 	light_rect = Rect2(Vector2.ZERO, lightImage.get_size())
 	fogImage.blend_rect(lightImage, light_rect, shape.global_position - light_offset)
 

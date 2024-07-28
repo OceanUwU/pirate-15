@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b561e3wuyevxd"]
+[gd_scene load_steps=25 format=3 uid="uid://b561e3wuyevxd"]
 
 [ext_resource type="Texture2D" uid="uid://3bk8pvbldhqd" path="res://assets/img/placeholder-wizard.png" id="1_48l1d"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_pmwgf"]
@@ -315,9 +315,6 @@ _data = {
 "walk_up_right": SubResource("Animation_or74t")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_v4f1p"]
-radius = 200.0
-
 [node name="Enemy" type="Path2D" node_paths=PackedStringArray("character", "sprite", "path_follow", "animation_player", "raycast", "line", "light_area")]
 script = ExtResource("1_pmwgf")
 character = NodePath("PathFollow2D/CharacterBody2D")
@@ -325,6 +322,7 @@ sprite = NodePath("PathFollow2D/CharacterBody2D/AnimatedSprite2D")
 path_follow = NodePath("PathFollow2D")
 animation_player = NodePath("PathFollow2D/CharacterBody2D/AnimationPlayer")
 roam_speed = 80.0
+chase_speed = 100.0
 raycast = NodePath("PathFollow2D/CharacterBody2D/RayCast2D")
 line = NodePath("PathFollow2D/CharacterBody2D/Line2D")
 light_area = NodePath("PathFollow2D/LightArea")
@@ -334,6 +332,7 @@ rotates = false
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="PathFollow2D"]
 collision_layer = 2
+collision_mask = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PathFollow2D/CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_ooxq3")
@@ -348,18 +347,24 @@ libraries = {
 }
 
 [node name="RayCast2D" type="RayCast2D" parent="PathFollow2D/CharacterBody2D"]
-target_position = Vector2(0, 240)
+target_position = Vector2(0, 450)
+collision_mask = 16
 
 [node name="Line2D" type="Line2D" parent="PathFollow2D/CharacterBody2D"]
-points = PackedVector2Array(0, 0, 0, 234)
+visible = false
+points = PackedVector2Array(0, 0, 0, 450)
 width = 8.0
 
-[node name="LightArea" parent="PathFollow2D" node_paths=PackedStringArray("collision_shape") instance=ExtResource("3_kapih")]
-collision_shape = NodePath("CollisionShape2D")
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="PathFollow2D/CharacterBody2D"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/LightArea"]
-shape = SubResource("CircleShape2D_v4f1p")
+[node name="LightArea" parent="PathFollow2D" instance=ExtResource("3_kapih")]
 
 [node name="AttackTimer" type="Timer" parent="PathFollow2D"]
+wait_time = 2.0
+
+[node name="ChaseTimer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
 
 [connection signal="timeout" from="PathFollow2D/AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="ChaseTimer" to="." method="_on_chase_timer_timeout"]

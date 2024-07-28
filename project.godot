@@ -58,6 +58,7 @@ down={
 2d_physics/layer_2="Enemies"
 2d_physics/layer_3="Light"
 2d_physics/layer_4="Bullet"
+2d_physics/layer_5="Player"
 
 [rendering]
 

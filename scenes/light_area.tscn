@@ -1,9 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjl0kk0rhoohw"]
+[gd_scene load_steps=3 format=3 uid="uid://cjl0kk0rhoohw"]
 
 [ext_resource type="Script" path="res://scenes/light_area.gd" id="1_25xx4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sk78q"]
 
 [node name="LightArea" type="Area2D"]
 collision_layer = 4
 script = ExtResource("1_25xx4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sk78q")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

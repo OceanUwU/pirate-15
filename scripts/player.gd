@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var move_speed : float = 150
 @export var starting_direction : Vector2 = Vector2(0,1)
+@export var hp: int
 
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
@@ -37,10 +38,15 @@ func pick_move_state():
 	else:
 		state_machine.travel("idle")
 
+func create_light_area():
+	var new_light = light_area.instantiate()
+	new_light.position = position
+	add_child(new_light)
 
 func _on_light_sense_area_entered(area):
 	print(area)
 	in_light_arr.append(area)
+	create_light_area()
 
 func _on_light_sense_area_exited(area):
 	print("out")
