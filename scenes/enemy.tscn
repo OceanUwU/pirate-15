@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b561e3wuyevxd"]
+[gd_scene load_steps=26 format=3 uid="uid://b561e3wuyevxd"]
 
 [ext_resource type="Texture2D" uid="uid://3bk8pvbldhqd" path="res://assets/img/placeholder-wizard.png" id="1_48l1d"]
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_pmwgf"]
@@ -315,6 +315,10 @@ _data = {
 "walk_up_right": SubResource("Animation_or74t")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7ihby"]
+radius = 52.0
+height = 228.0
+
 [node name="Enemy" type="Path2D" node_paths=PackedStringArray("character", "sprite", "path_follow", "animation_player", "raycast", "line", "light_area")]
 script = ExtResource("1_pmwgf")
 character = NodePath("PathFollow2D/CharacterBody2D")
@@ -325,7 +329,7 @@ roam_speed = 80.0
 chase_speed = 100.0
 raycast = NodePath("PathFollow2D/CharacterBody2D/RayCast2D")
 line = NodePath("PathFollow2D/CharacterBody2D/Line2D")
-light_area = NodePath("PathFollow2D/LightArea")
+light_area = NodePath("PathFollow2D/CharacterBody2D/LightArea")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="."]
 rotates = false
@@ -357,14 +361,24 @@ width = 8.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="PathFollow2D/CharacterBody2D"]
 
-[node name="LightArea" parent="PathFollow2D" instance=ExtResource("3_kapih")]
+[node name="LightArea" parent="PathFollow2D/CharacterBody2D" instance=ExtResource("3_kapih")]
+collision_mask = 16
+
+[node name="Blocking" type="Area2D" parent="PathFollow2D/CharacterBody2D"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/CharacterBody2D/Blocking"]
+shape = SubResource("CapsuleShape2D_7ihby")
 
 [node name="AttackTimer" type="Timer" parent="PathFollow2D"]
-wait_time = 2.0
+wait_time = 1.5
 
 [node name="ChaseTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
 
+[connection signal="body_entered" from="PathFollow2D/CharacterBody2D/LightArea" to="." method="_on_light_area_body_entered"]
+[connection signal="body_exited" from="PathFollow2D/CharacterBody2D/LightArea" to="." method="_on_light_area_body_exited"]
 [connection signal="timeout" from="PathFollow2D/AttackTimer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="ChaseTimer" to="." method="_on_chase_timer_timeout"]

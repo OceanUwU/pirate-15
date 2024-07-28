@@ -36,46 +36,35 @@ func _ready() -> void:
 	animation_player.play(action + "_" + direction)
 
 func _physics_process(delta: float) -> void:
-	if following_path and state == State.PATROL:
-		var path_pos_before: Vector2 = path_follow.position
-		path_follow.progress += roam_speed * delta
-		set_dir(path_pos_before.angle_to_point(path_follow.position))
-	elif state == State.CHASE:
-		var curr_agent_pos = character.global_position
-		var next_path_pos = nav.get_next_path_position()
-		character.velocity = curr_agent_pos.direction_to(next_path_pos) * chase_speed
-		print(character.velocity)
-		character.move_and_slide()
 	match state:
 		State.WAIT:
 			pass
 		State.PATROL:
-			pass
+			if following_path:
+				var path_pos_before: Vector2 = path_follow.position
+				path_follow.progress += roam_speed * delta
+				set_dir(path_pos_before.angle_to_point(path_follow.position))
 		State.CHASE:
-			pass
+			var curr_agent_pos = character.global_position
+			var next_path_pos = nav.get_next_path_position()
+			character.velocity = curr_agent_pos.direction_to(next_path_pos) * chase_speed
+			character.move_and_slide()
 		State.ATTACK:
-			pass
-				#if hover_timer.time_left <= 0:
-				#hover_timer.start()
-			#radius = rng.randf_range(350, 500)
-			#angle += 0.01
-			#worm_pos.x = pos.x + radius * cos(angle)
-			#worm_pos.y = pos.y + radius * sin(angle)
-			#move(Vector2(worm_pos.x, worm_pos.y), head, delta)
-		#var nav_dir = to_local(nav.get_next_path_position()).normalized()
-		#print(to_local(nav.get_next_path_position()))
-		#character.velocity = nav_dir * chase_speed
-		#character.move_and_slide()
+			if attack_timer.time_left == 0:
+				attack_timer.start()
+			character.velocity = Vector2(0, 0)
 	for i in range(raycast_arr.size()):
 		if raycast_arr[i].is_colliding():
 			#print(raycast_arr[i].get_collider())
 			sense()
 
-#func get_circle_position(player_pos, rad):
-	#var x = player_pos.x + cos(angle) * rad
-	#var y = player_pos.y + sin(angle) * rad
-
-	#return Vector2(x, y)
+func change_state(new_state):
+	if new_state == state:
+		return
+	if new_state == State.ATTACK:
+		attack()
+	state = new_state
+	
 
 func set_dir(angle: float) -> void:
 	#print(rad_to_deg(angle))
@@ -130,18 +119,16 @@ func change_raycast_rotation(angle: float):
 
 #Check if player is in light or out of light after raycast senses them
 func sense():
-	if player.in_light_arr:
-		state = State.CHASE
+	if player.in_light_arr and (state == State.PATROL or state == State.WAIT):
+		change_state(State.CHASE)
 		#print(rad_to_deg(rotation + player.global_position.angle_to_point(path_follow.global_position)))
 		change_raycast_rotation(player.global_position.angle_to_point(path_follow.global_position))
-		if attack_timer.time_left == 0:
-			attack_timer.start()
 
 func attack():
 	var new_bullet = bullet.instantiate()
-	new_bullet.dir = player.global_position.angle_to_point(path_follow.global_position) + deg_to_rad(270)
+	new_bullet.dir = player.global_position.angle_to_point(character.global_position) + deg_to_rad(270)
 	new_bullet.global_position = character.global_position
-	new_bullet.rotation = player.global_position.angle_to_point(path_follow.global_position)
+	new_bullet.rotation = player.global_position.angle_to_point(character.global_position)
 	new_bullet.visible = true
 	new_bullet.z_index = 1
 	add_child(new_bullet)
@@ -155,3 +142,10 @@ func _on_attack_timer_timeout():
 
 func _on_chase_timer_timeout():
 	make_path()
+
+func _on_light_area_body_entered(body):
+	change_state(State.ATTACK)
+
+func _on_light_area_body_exited(body):
+	change_state(State.PATROL)
+	attack_timer.stop()

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_i5vcg"]
 [ext_resource type="Texture2D" uid="uid://d3lkxpieh0h0i" path="res://assets/img/crow_walk_right.png" id="2_3cupo"]
+[ext_resource type="PackedScene" uid="uid://cjl0kk0rhoohw" path="res://scenes/light_area.tscn" id="3_j6piv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_n8xs5"]
 radius = 18.0
@@ -171,9 +172,6 @@ height = 0.098711
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lcfop"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_2kpgy"]
-radius = 250.0
-
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 17
 script = ExtResource("1_i5vcg")
@@ -221,10 +219,10 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CapsuleShape2D_lcfop")
 
-[node name="Surround" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Surround"]
-shape = SubResource("CircleShape2D_2kpgy")
+[node name="LightArea" parent="." instance=ExtResource("3_j6piv")]
+process_mode = 4
+position = Vector2(0, 10)
+size = 200
 
 [connection signal="area_entered" from="LightSense" to="." method="_on_light_sense_area_entered"]
 [connection signal="area_exited" from="LightSense" to="." method="_on_light_sense_area_exited"]

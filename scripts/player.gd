@@ -6,7 +6,7 @@ extends CharacterBody2D
 
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
-@onready var light_area = preload("res://scenes/light_area.tscn")
+@onready var light_area = $LightArea
 
 var in_light_arr = []
 
@@ -24,6 +24,7 @@ func _physics_process(_delta):
 	velocity = input_direction * move_speed
 	pick_move_state()
 	move_and_slide()
+	#print(light_area.size)
 	
 
 func update_animation_parameter(move_input : Vector2):
@@ -39,9 +40,8 @@ func pick_move_state():
 		state_machine.travel("idle")
 
 func create_light_area():
-	var new_light = light_area.instantiate()
-	new_light.position = position
-	add_child(new_light)
+	light_area.global_position = global_position
+	light_area.process_mode = Node.PROCESS_MODE_INHERIT
 
 func _on_light_sense_area_entered(area):
 	print(area)

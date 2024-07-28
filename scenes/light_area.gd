@@ -6,3 +6,4 @@ extends Area2D
 
 func _ready():
 	collision_shape.shape.radius = size/2
+

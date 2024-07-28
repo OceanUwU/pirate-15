@@ -32,7 +32,7 @@ layer_0/tile_data = PackedInt32Array(0, 131073, 4, 65536, 1, 2, 131072, 1, 2, 19
 [node name="ShadowManager" parent="." node_paths=PackedStringArray("fog", "light_arr") instance=ExtResource("4_edccw")]
 fog = NodePath("../Fog")
 LightTexture = ExtResource("3_gfj6h")
-light_arr = [NodePath("../Enemy/PathFollow2D/LightArea"), NodePath("../Enemy2/PathFollow2D/LightArea"), NodePath("../LightArea"), NodePath("../LightArea2")]
+light_arr = [NodePath("../Enemy/PathFollow2D/CharacterBody2D/LightArea"), NodePath("../Enemy2/PathFollow2D/CharacterBody2D/LightArea"), NodePath("../LightArea"), NodePath("../LightArea2"), NodePath("../Player/LightArea")]
 
 [node name="Table" type="Sprite2D" parent="."]
 position = Vector2(514, 687)
@@ -41,7 +41,7 @@ texture = ExtResource("6_dlyff")
 
 [node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_o5a2t")]
 curve = SubResource("Curve2D_6y1us")
-player = NodePath("../PlayerSprite")
+player = NodePath("../Player")
 state = 1
 
 [node name="PathFollow2D" parent="Enemy" index="0"]
@@ -49,15 +49,15 @@ position = Vector2(400, 400)
 
 [node name="Enemy2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_o5a2t")]
 starting_ang = 180.0
-player = NodePath("../PlayerSprite")
+player = NodePath("../Player")
 
 [node name="PathFollow2D" parent="Enemy2" index="0"]
 position = Vector2(139, 454)
 
-[node name="PlayerSprite" parent="." instance=ExtResource("6_q7otw")]
+[node name="Player" parent="." instance=ExtResource("6_q7otw")]
 position = Vector2(165, 126)
 
-[node name="Camera2D" type="Camera2D" parent="PlayerSprite"]
+[node name="Camera2D" type="Camera2D" parent="Player"]
 
 [node name="LightArea" parent="." instance=ExtResource("8_plrqj")]
 position = Vector2(783, 237)
@@ -79,3 +79,4 @@ centered = false
 
 [editable path="Enemy"]
 [editable path="Enemy2"]
+[editable path="Player"]
