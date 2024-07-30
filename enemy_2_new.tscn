@@ -17,9 +17,11 @@ tracks/0/keys = {
 "values": [30]
 }
 
-[sub_resource type="Animation" id="Animation_1d8ug"]
-resource_name = "enemy2_walk_r"
-length = 0.6
+[sub_resource type="Animation" id="Animation_u32st"]
+resource_name = "enemy2_attack_l"
+length = 0.06
+loop_mode = 1
+step = 0.02
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -27,14 +29,67 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [30, 31, 32, 33, 34, 35]
+"values": [63]
 }
 
-[sub_resource type="Animation" id="Animation_ugwpi"]
-resource_name = "enemy2_walk_l"
+[sub_resource type="Animation" id="Animation_pd6r5"]
+resource_name = "enemy2_attack_r"
+length = 0.06
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [62]
+}
+
+[sub_resource type="Animation" id="Animation_f1rlu"]
+resource_name = "enemy2_detect_l"
+length = 0.44
+loop_mode = 1
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.38),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [51, 52, 53, 54, 55, 56, 57, 58, 59]
+}
+
+[sub_resource type="Animation" id="Animation_c0350"]
+resource_name = "enemy2_detect_r"
+length = 0.44
+loop_mode = 1
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.38),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [42, 43, 44, 45, 46, 47, 48, 49, 50]
+}
+
+[sub_resource type="Animation" id="Animation_xesbx"]
+resource_name = "enemy2_idle_l"
 length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
@@ -66,8 +121,8 @@ tracks/0/keys = {
 "values": [30, 31, 32, 33, 34, 35]
 }
 
-[sub_resource type="Animation" id="Animation_xesbx"]
-resource_name = "enemy2_idle_l"
+[sub_resource type="Animation" id="Animation_ugwpi"]
+resource_name = "enemy2_walk_l"
 length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
@@ -83,11 +138,9 @@ tracks/0/keys = {
 "values": [36, 37, 38, 39, 40, 41]
 }
 
-[sub_resource type="Animation" id="Animation_c0350"]
-resource_name = "enemy2_detect_r"
-length = 0.44
-loop_mode = 1
-step = 0.02
+[sub_resource type="Animation" id="Animation_1d8ug"]
+resource_name = "enemy2_walk_r"
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -95,63 +148,10 @@ tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.38),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [42, 43, 44, 45, 46, 47, 48, 49, 50]
-}
-
-[sub_resource type="Animation" id="Animation_f1rlu"]
-resource_name = "enemy2_detect_l"
-length = 0.44
-loop_mode = 1
-step = 0.02
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.38),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [51, 52, 53, 54, 55, 56, 57, 58, 59]
-}
-
-[sub_resource type="Animation" id="Animation_pd6r5"]
-resource_name = "enemy2_attack_r"
-length = 0.06
-step = 0.02
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [62]
-}
-
-[sub_resource type="Animation" id="Animation_u32st"]
-resource_name = "enemy2_attack_l"
-length = 0.06
-loop_mode = 1
-step = 0.02
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [63]
+"values": [30, 31, 32, 33, 34, 35]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ccxbn"]
