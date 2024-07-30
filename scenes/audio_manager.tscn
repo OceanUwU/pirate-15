@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/audio_manager.gd" id="1_3h2yg"]
 [ext_resource type="AudioStream" uid="uid://cvuiq3xsxay3j" path="res://audio/gamejam stealth goofy 2 mixed.mp3" id="2_ushkv"]
-[ext_resource type="AudioStream" uid="uid://bbs5op5v680wj" path="res://audio/battle theme gamejam 1 demo.mp3" id="3_fqei5"]
+[ext_resource type="AudioStream" uid="uid://bks6grs0uk0j2" path="res://audio/battle theme gamejam 1 no silence at the end.mp3" id="3_u4354"]
 
 [node name="AudioManager" type="Node2D"]
 script = ExtResource("1_3h2yg")
@@ -11,4 +11,4 @@ script = ExtResource("1_3h2yg")
 stream = ExtResource("2_ushkv")
 
 [node name="BattleBGM" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_fqei5")
+stream = ExtResource("3_u4354")

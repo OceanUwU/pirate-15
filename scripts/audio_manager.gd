@@ -5,5 +5,5 @@ extends Node2D
 
 
 func _ready():
-	stealth_bgm.play()
+	battle_bgm.play()
 	#battle_bgm.play()
