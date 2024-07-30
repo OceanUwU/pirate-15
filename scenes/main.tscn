@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cr4uc5uqiebxb"]
+[gd_scene load_steps=12 format=3 uid="uid://cr4uc5uqiebxb"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_1i8d8"]
 [ext_resource type="PackedScene" uid="uid://b561e3wuyevxd" path="res://scenes/enemy.tscn" id="1_o5a2t"]
@@ -8,11 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://jhtn56plofc2" path="res://scenes/tile_map.tscn" id="7_lrm11"]
 [ext_resource type="PackedScene" uid="uid://cheke7xaxace1" path="res://scenes/audio_manager.tscn" id="8_dvmap"]
 [ext_resource type="PackedScene" uid="uid://cjl0kk0rhoohw" path="res://scenes/light_area.tscn" id="8_plrqj"]
-[ext_resource type="PackedScene" uid="uid://dqotwv3pp0glp" path="res://scenes/props/cabinet.tscn" id="9_8sync"]
-[ext_resource type="PackedScene" uid="uid://drcra0l5jel10" path="res://scenes/props/printer.tscn" id="10_c6iyv"]
-[ext_resource type="PackedScene" uid="uid://b558i82s6aec6" path="res://scenes/props/scroll.tscn" id="11_y3fev"]
-[ext_resource type="PackedScene" uid="uid://ibikhvtijdva" path="res://scenes/props/skull.tscn" id="12_ftvsf"]
-[ext_resource type="PackedScene" uid="uid://bae8sw2ugxn20" path="res://scenes/props/table.tscn" id="13_krvin"]
 
 [sub_resource type="Curve2D" id="Curve2D_6y1us"]
 _data = {
@@ -70,28 +65,13 @@ position = Vector2(1267, 235)
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="LightArea2"]
 shape = SubResource("CircleShape2D_3pdvt")
 
+[node name="AudioManager" parent="." instance=ExtResource("8_dvmap")]
+
 [node name="Fog" type="Sprite2D" parent="."]
 z_index = 2
 material = SubResource("CanvasItemMaterial_wgypv")
 texture = ExtResource("3_gfj6h")
 centered = false
-
-[node name="AudioManager" parent="." instance=ExtResource("8_dvmap")]
-
-[node name="Printer" parent="." instance=ExtResource("10_c6iyv")]
-position = Vector2(534, 76)
-
-[node name="Scroll" parent="." instance=ExtResource("11_y3fev")]
-position = Vector2(478, 478)
-
-[node name="Skull" parent="." instance=ExtResource("12_ftvsf")]
-position = Vector2(92, 281)
-
-[node name="Table" parent="." instance=ExtResource("13_krvin")]
-position = Vector2(719, 519)
-
-[node name="Cabinet" parent="." instance=ExtResource("9_8sync")]
-position = Vector2(425, 180)
 
 [editable path="Enemy"]
 [editable path="Enemy2"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b561e3wuyevxd"]
+[gd_scene load_steps=12 format=3 uid="uid://b561e3wuyevxd"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_pmwgf"]
 [ext_resource type="Texture2D" uid="uid://d4c0e6ytxgrch" path="res://assets/img/enemies_20240730.png" id="2_d8phm"]
@@ -7,21 +7,6 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fl47w"]
 radius = 21.0
 height = 42.0
-
-[sub_resource type="Animation" id="Animation_fevgk"]
-resource_name = "e2_idle_r"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 1,
-"values": []
-}
 
 [sub_resource type="Animation" id="Animation_1wxvw"]
 length = 0.001
@@ -36,55 +21,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [78]
-}
-
-[sub_resource type="Animation" id="Animation_lct7f"]
-resource_name = "e1_iw_u"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [66, 67, 68, 69, 70, 71]
-}
-
-[sub_resource type="Animation" id="Animation_po5a3"]
-resource_name = "e1_iw_r"
-length = 0.6
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [30, 31, 32, 33, 34, 35]
-}
-
-[sub_resource type="Animation" id="Animation_cwbuj"]
-resource_name = "e1_iw_l"
-length = 0.6
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [36, 37, 38, 39, 40, 41]
 }
 
 [sub_resource type="Animation" id="Animation_yhaqr"]
@@ -104,14 +40,62 @@ tracks/0/keys = {
 "values": [78, 79, 80, 81, 82, 83]
 }
 
+[sub_resource type="Animation" id="Animation_cwbuj"]
+resource_name = "e1_iw_l"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [36, 37, 38, 39, 40, 41]
+}
+
+[sub_resource type="Animation" id="Animation_po5a3"]
+resource_name = "e1_iw_r"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [30, 31, 32, 33, 34, 35]
+}
+
+[sub_resource type="Animation" id="Animation_lct7f"]
+resource_name = "e1_iw_u"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [66, 67, 68, 69, 70, 71]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_34t12"]
 _data = {
 "RESET": SubResource("Animation_1wxvw"),
 "e1_iw_d": SubResource("Animation_yhaqr"),
 "e1_iw_l": SubResource("Animation_cwbuj"),
 "e1_iw_r": SubResource("Animation_po5a3"),
-"e1_iw_u": SubResource("Animation_lct7f"),
-"e2_idle_r": SubResource("Animation_fevgk")
+"e1_iw_u": SubResource("Animation_lct7f")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7ihby"]
