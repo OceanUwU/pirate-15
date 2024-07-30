@@ -1,11 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqotwv3pp0glp"]
+[gd_scene load_steps=3 format=3 uid="uid://dqotwv3pp0glp"]
 
 [ext_resource type="Texture2D" uid="uid://bgokfslxtuqh5" path="res://assets/img/Untitled_Artwork-3.png" id="1_4cacg"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6crke"]
+size = Vector2(67, 141)
+
 [node name="Cabinet" type="Area2D"]
+collision_mask = 18
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.05, 0.05)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_4cacg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6.5, -0.5)
+shape = SubResource("RectangleShape2D_6crke")

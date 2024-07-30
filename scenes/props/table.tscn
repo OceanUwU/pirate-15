@@ -3,9 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://ogetgbaq0nmv" path="res://assets/img/Untitled_Artwork-1.png" id="1_yptpx"]
 
 [node name="Table" type="Area2D"]
+collision_mask = 18
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.05, 0.05)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_yptpx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
