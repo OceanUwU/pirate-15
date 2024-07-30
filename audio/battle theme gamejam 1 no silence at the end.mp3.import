@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bks6grs0uk0j2"
+path="res://.godot/imported/battle theme gamejam 1 no silence at the end.mp3-b3f09079e7006fb21fc6a4d315e58cca.mp3str"
+
+[deps]
+
+source_file="res://audio/battle theme gamejam 1 no silence at the end.mp3"
+dest_files=["res://.godot/imported/battle theme gamejam 1 no silence at the end.mp3-b3f09079e7006fb21fc6a4d315e58cca.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
