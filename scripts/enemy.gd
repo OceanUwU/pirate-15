@@ -21,6 +21,8 @@ enum Direction { UP, UP_RIGHT, DOWN, DOWN_RIGHT }
 @onready var raycast_ang: float = starting_ang
 @onready var attack_timer = $PathFollow2D/AttackTimer
 @onready var nav = $PathFollow2D/CharacterBody2D/NavigationAgent2D
+@onready var chase_timer = $ChaseTimer
+@onready var wait_timer = $WaitTimer
 
 @onready var line_arr: Array[Line2D] = [line]
 @onready var bullet = preload("res://scenes/bullet.tscn")
@@ -36,6 +38,11 @@ func _ready() -> void:
 	animation_player.play(action + "_" + direction)
 
 func _physics_process(delta: float) -> void:
+	for i in range(raycast_arr.size()):
+		if raycast_arr[i].is_colliding():
+			sense()
+		elif wait_timer.time_left == 0:
+			wait_timer.start()
 	match state:
 		State.WAIT:
 			pass
@@ -49,20 +56,30 @@ func _physics_process(delta: float) -> void:
 			var next_path_pos = nav.get_next_path_position()
 			character.velocity = curr_agent_pos.direction_to(next_path_pos) * chase_speed
 			character.move_and_slide()
-		State.ATTACK:
+			set_dir(character.global_position.angle_to_point(player.position))
+			if attack_timer.is_paused():
+				attack_timer.set_paused(false)
 			if attack_timer.time_left == 0:
 				attack_timer.start()
 			character.velocity = Vector2(0, 0)
-	for i in range(raycast_arr.size()):
-		if raycast_arr[i].is_colliding():
-			#print(raycast_arr[i].get_collider())
-			sense()
+			set_dir(character.global_position.angle_to_point(player.position))
+		State.ATTACK:
+			if attack_timer.is_paused():
+				attack_timer.set_paused(false)
+			if attack_timer.time_left == 0:
+				attack_timer.start()
+			character.velocity = Vector2(0, 0)
+			set_dir(character.global_position.angle_to_point(player.position))
 
 func change_state(new_state):
+	print(new_state, state)
 	if new_state == state:
 		return
-	if new_state == State.ATTACK:
-		attack()
+	if state == State.ATTACK or state == State.CHASE:
+		attack_timer.stop()
+	if new_state == State.PATROL and !curve:
+		new_state = State.WAIT
+		print(new_state)
 	state = new_state
 	
 
@@ -101,7 +118,7 @@ func duplicate_line():
 	line_arr.append(new_line)
 
 func change_raycast_rotation(angle: float):
-	if state == State.PATROL:
+	if state == State.PATROL or state == State.CHASE or state == State.ATTACK:
 		angle += deg_to_rad(-90)
 	else:
 		angle += deg_to_rad(90)
@@ -123,6 +140,9 @@ func sense():
 		change_state(State.CHASE)
 		#print(rad_to_deg(rotation + player.global_position.angle_to_point(path_follow.global_position)))
 		change_raycast_rotation(player.global_position.angle_to_point(path_follow.global_position))
+		make_path()
+		player.create_light_area()
+	player.light_timer.start()
 
 func attack():
 	var new_bullet = bullet.instantiate()
@@ -134,18 +154,22 @@ func attack():
 	add_child(new_bullet)
 
 func make_path():
-	nav.target_position = player.global_position
+	chase_timer.start()
 	#print(nav.target_position)
 
 func _on_attack_timer_timeout():
 	attack()
 
 func _on_chase_timer_timeout():
-	make_path()
+	nav.target_position = player.global_position
 
 func _on_light_area_body_entered(body):
-	change_state(State.ATTACK)
+	if state == State.CHASE:
+		change_state(State.ATTACK)
 
 func _on_light_area_body_exited(body):
+	attack_timer.set_paused(true)
+
+func _on_wait_timer_timeout():
 	change_state(State.PATROL)
-	attack_timer.stop()
+	print(state)

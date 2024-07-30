@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var animation_tree = $AnimationTree
 @onready var state_machine = animation_tree.get("parameters/playback")
 @onready var light_area = $LightArea
+@onready var light_timer = $LightTimer
 
 var in_light_arr = []
 
@@ -46,7 +47,6 @@ func create_light_area():
 func _on_light_sense_area_entered(area):
 	print(area)
 	in_light_arr.append(area)
-	create_light_area()
 
 func _on_light_sense_area_exited(area):
 	print("out")
@@ -54,3 +54,6 @@ func _on_light_sense_area_exited(area):
 
 func _on_hurtbox_body_entered(body):
 	pass # Replace with function body.
+
+func _on_light_timer_timeout():
+	light_area.process_mode = Node.PROCESS_MODE_DISABLED
