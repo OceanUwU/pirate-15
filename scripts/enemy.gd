@@ -68,10 +68,10 @@ func _physics_process(delta: float) -> void:
 			var next_path_pos = nav.get_next_path_position()
 			character.velocity = curr_agent_pos.direction_to(next_path_pos) * chase_speed
 			character.move_and_slide()
+			#print("find")
 			if character.global_position == nav.target_position:
 				if wait_timer.time_left == 0:
 					wait_timer.start()
-			print("find")
 		State.ATTACK:
 			if attack_timer.is_paused():
 				attack_timer.set_paused(false)
@@ -83,8 +83,12 @@ func _physics_process(delta: float) -> void:
 func change_state(new_state):
 	if new_state == state:
 		return
+	if new_state != State.CHASE:
+		chase_timer.stop()
 	if (state == State.CHASE or state == State.ATTACK) and (new_state != State.CHASE or new_state != State.ATTACK):
-		nav.target_position = player.position
+		var pos = player.position
+		nav.target_position = pos
+		set_dir(character.global_position.angle_to_point(player.position))
 		new_state = State.FIND
 	if state == State.ATTACK or state == State.CHASE:
 		attack_timer.stop()
@@ -173,6 +177,7 @@ func _on_attack_timer_timeout():
 
 func _on_chase_timer_timeout():
 	nav.target_position = player.global_position
+	print("chase")
 
 func _on_light_area_body_entered(body):
 	if state == State.CHASE:

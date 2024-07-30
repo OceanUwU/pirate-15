@@ -3,6 +3,6 @@
 [ext_resource type="TileSet" uid="uid://migiubcvd85q" path="res://scenes/edited_tileset.tres" id="1_n43ty"]
 
 [node name="TileMap" type="TileMap"]
-scale = Vector2(0.125, 0.125)
+scale = Vector2(0.2, 0.2)
 tile_set = ExtResource("1_n43ty")
 format = 2
