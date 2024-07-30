@@ -30,8 +30,8 @@ enum Direction { UP, UP_RIGHT, DOWN, DOWN_RIGHT }
 
 #Light is Area2D, darkness is revealed when light collides with it. 
 var following_path: bool = true
-var direction: String = "up"
-var action: String = "walk"
+var direction: String = "u"
+var action: String = "e1_iw"
 
 func _ready() -> void:
 	set_up_raycast()
@@ -103,11 +103,11 @@ func set_dir(angle: float) -> void:
 	change_raycast_rotation(angle) #TEMP SOLUTION (WHEN 8 DIRECTION ADDED WILL CHANGE)
 	var direction_before: String = direction
 	angle = fmod(angle + TAU * 6, TAU) - PI
-	direction = "down" if angle < 0.01 else "up"
+	direction = "d" if angle < 0.01 else "u"
 	if abs(angle) < PI / 3.0:
-		direction += "_left"
+		direction = "l"
 	elif abs(angle) > 2 * PI / 3.0:
-		direction += "_right"
+		direction = "r"
 	
 	if direction_before != direction:
 		animation_player.play(action + "_" + direction)
