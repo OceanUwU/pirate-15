@@ -1,6 +1,6 @@
 class_name Enemy extends Path2D
 
-enum State {WAIT, PATROL, CHASE, ATTACK}
+enum State {WAIT, PATROL, CHASE, FIND, ATTACK}
 enum Direction { UP, UP_RIGHT, DOWN, DOWN_RIGHT }
 
 @export var character: CharacterBody2D
@@ -39,10 +39,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	for i in range(raycast_arr.size()):
-		if raycast_arr[i].is_colliding():
+		if raycast_arr[i].get_collider() == player:
 			sense()
-		elif wait_timer.time_left == 0:
-			wait_timer.start()
 	match state:
 		State.WAIT:
 			pass
@@ -63,6 +61,17 @@ func _physics_process(delta: float) -> void:
 				attack_timer.start()
 			character.velocity = Vector2(0, 0)
 			set_dir(character.global_position.angle_to_point(player.position))
+			if light_area in player.in_light_arr:
+				change_state(State.ATTACK)
+		State.FIND:
+			var curr_agent_pos = character.global_position
+			var next_path_pos = nav.get_next_path_position()
+			character.velocity = curr_agent_pos.direction_to(next_path_pos) * chase_speed
+			character.move_and_slide()
+			if character.global_position == nav.target_position:
+				if wait_timer.time_left == 0:
+					wait_timer.start()
+			print("find")
 		State.ATTACK:
 			if attack_timer.is_paused():
 				attack_timer.set_paused(false)
@@ -72,14 +81,16 @@ func _physics_process(delta: float) -> void:
 			set_dir(character.global_position.angle_to_point(player.position))
 
 func change_state(new_state):
-	print(new_state, state)
 	if new_state == state:
 		return
+	if (state == State.CHASE or state == State.ATTACK) and (new_state != State.CHASE or new_state != State.ATTACK):
+		nav.target_position = player.position
+		new_state = State.FIND
 	if state == State.ATTACK or state == State.CHASE:
 		attack_timer.stop()
 	if new_state == State.PATROL and !curve:
 		new_state = State.WAIT
-		print(new_state)
+		#print(new_state)
 	state = new_state
 	
 
@@ -172,4 +183,4 @@ func _on_light_area_body_exited(body):
 
 func _on_wait_timer_timeout():
 	change_state(State.PATROL)
-	print(state)
+	#print(state)

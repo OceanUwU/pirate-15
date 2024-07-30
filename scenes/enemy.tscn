@@ -352,9 +352,10 @@ libraries = {
 
 [node name="RayCast2D" type="RayCast2D" parent="PathFollow2D/CharacterBody2D"]
 target_position = Vector2(0, 450)
-collision_mask = 16
+collision_mask = 17
 
 [node name="Line2D" type="Line2D" parent="PathFollow2D/CharacterBody2D"]
+visible = false
 points = PackedVector2Array(0, 0, 0, 450)
 width = 8.0
 
