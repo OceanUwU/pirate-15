@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7b6dh65k2f0x"]
+
+[ext_resource type="PackedScene" uid="uid://cnhi26r3r2wwp" path="res://level_f.tscn" id="1_ubiw7"]
+[ext_resource type="PackedScene" uid="uid://bae8sw2ugxn20" path="res://scenes/props/table.tscn" id="2_legs5"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Node2D" parent="." instance=ExtResource("1_ubiw7")]
+
+[node name="Table" parent="." instance=ExtResource("2_legs5")]
+position = Vector2(-616, -1136)
+
+[node name="Table2" parent="." instance=ExtResource("2_legs5")]
+position = Vector2(545, -1939)

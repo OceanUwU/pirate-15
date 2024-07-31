@@ -31,14 +31,14 @@ func _physics_process(_delta):
 func update_animation_parameter(move_input : Vector2):
 
 	if(move_input != Vector2.ZERO):
-		animation_tree.set("parameters/walk/blend_position", move_input)
-		animation_tree.set("parameters/idle/blend_position", move_input)
+		animation_tree.set("parameters/crow_walk_r/blend_position", move_input)
+		animation_tree.set("parameters/crow_idle_r/blend_position", move_input)
 		
 func pick_move_state():
 	if(velocity != Vector2.ZERO):
-		state_machine.travel("walk")
+		state_machine.travel("crow_walk_r")
 	else:
-		state_machine.travel("idle")
+		state_machine.travel("crow_idle_r")
 
 func create_light_area():
 	light_area.global_position = global_position
