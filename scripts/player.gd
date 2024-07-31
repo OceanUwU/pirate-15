@@ -30,26 +30,26 @@ func _physics_process(_delta):
 func update_animation_parameter(move_input : Vector2):
 	if move_input != Vector2.ZERO:
 		if buffed:
-			animation_tree.set("parameters/buff_crow_walk_r/blend_position", move_input)
-			animation_tree.set("parameters/buff_crow_idle_r/blend_position", move_input)
+			animation_tree.set("parameters/walk/blend_position", move_input)
+			animation_tree.set("parameters/idle/blend_position", move_input)
 		else:
-			animation_tree.set("parameters/crow_walk_r/blend_position", move_input)
-			animation_tree.set("parameters/crow_idle_r/blend_position", move_input)
+			animation_tree.set("parameters/walk/blend_position", move_input)
+			animation_tree.set("parameters/idle/blend_position", move_input)
 
 func pick_move_state():
 	if velocity != Vector2.ZERO:
 		if abs(velocity.x) > abs(velocity.y):
 			if velocity.x > 0:
-				state_machine.travel("crow_walk_r")
+				state_machine.travel("walk")
 			else:
-				state_machine.travel("crow_walk_l")
+				state_machine.travel("walk")
 		else:
 			if velocity.y > 0:
-				state_machine.travel("crow_walk_d")
+				state_machine.travel("walk")
 			else:
-				state_machine.travel("crow_walk_u")
+				state_machine.travel("walk")
 	else:
-		state_machine.travel("crow_idle_r")
+		state_machine.travel("idle")
 
 func create_light_area():
 	light_area.global_position = global_position
