@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://cdf6ykr72br6j"]
+[gd_scene load_steps=35 format=3 uid="uid://cdf6ykr72br6j"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_i5vcg"]
 [ext_resource type="Texture2D" uid="uid://fpk4x2teo1md" path="res://assets/crow_20240729.png" id="2_bccd3"]
@@ -19,10 +19,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": []
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_deknk"]
@@ -290,6 +290,8 @@ height = 0.098711
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lcfop"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_tdwy5"]
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 17
 script = ExtResource("1_i5vcg")
@@ -343,6 +345,16 @@ process_mode = 4
 position = Vector2(0, 10)
 size = 200
 
+[node name="BuffAreas" type="Node2D" parent="."]
+
+[node name="BuffHitbox" type="Area2D" parent="BuffAreas"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BuffAreas/BuffHitbox"]
+position = Vector2(45, -16)
+shape = SubResource("CircleShape2D_tdwy5")
+
 [node name="LightTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
@@ -350,4 +362,5 @@ one_shot = true
 [connection signal="area_entered" from="LightSense" to="." method="_on_light_sense_area_entered"]
 [connection signal="area_exited" from="LightSense" to="." method="_on_light_sense_area_exited"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="body_entered" from="BuffAreas/BuffHitbox" to="." method="_on_buff_hitbox_body_entered"]
 [connection signal="timeout" from="LightTimer" to="." method="_on_light_timer_timeout"]

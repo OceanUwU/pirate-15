@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/light_area.gd" id="1_25xx4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sk78q"]
+radius = 200.0
 
 [node name="LightArea" type="Area2D"]
 collision_layer = 4

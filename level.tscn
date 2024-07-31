@@ -1,14 +1,97 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7b6dh65k2f0x"]
+[gd_scene load_steps=12 format=3 uid="uid://bl06v4dpls5ie"]
 
-[ext_resource type="PackedScene" uid="uid://cnhi26r3r2wwp" path="res://level_f.tscn" id="1_ubiw7"]
+[ext_resource type="Script" path="res://level.gd" id="1_knbyo"]
+[ext_resource type="PackedScene" uid="uid://bcifcfd7xlgso" path="res://level_f.tscn" id="1_ubiw7"]
 [ext_resource type="PackedScene" uid="uid://bae8sw2ugxn20" path="res://scenes/props/table.tscn" id="2_legs5"]
+[ext_resource type="PackedScene" uid="uid://drcra0l5jel10" path="res://scenes/props/printer.tscn" id="4_ngwps"]
+[ext_resource type="PackedScene" uid="uid://ibikhvtijdva" path="res://scenes/props/skull.tscn" id="5_umioa"]
+[ext_resource type="PackedScene" uid="uid://dqotwv3pp0glp" path="res://scenes/props/cabinet.tscn" id="6_lge6j"]
+[ext_resource type="PackedScene" uid="uid://b561e3wuyevxd" path="res://scenes/enemy.tscn" id="6_tjeqf"]
+[ext_resource type="PackedScene" uid="uid://da5be18eeeliw" path="res://scenes/potion.tscn" id="7_qs7nf"]
+[ext_resource type="PackedScene" uid="uid://cjl0kk0rhoohw" path="res://scenes/light_area.tscn" id="7_rd3jq"]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="Curve2D" id="Curve2D_1yk8f"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -100, -1600, 0, 0, 0, 0, -100, -1350, 0, 0, 0, 0, 700, -1350, 0, 0, 0, 0, 700, -1600, 0, 0, 0, 0, 700, -1350, 0, 0, 0, 0, -100, -1350, 0, 0, 0, 0, -100, -1600)
+}
+point_count = 7
+
+[sub_resource type="Curve2D" id="Curve2D_xe0ah"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -100, -700, 0, 0, 0, 0, -100, -350, 0, 0, 0, 0, -500, -350, 0, 0, 0, 0, -100, -350, 0, 0, 0, 0, -100, -700)
+}
+point_count = 5
+
+[node name="Level" type="Node2D"]
+position = Vector2(613, 1843)
+script = ExtResource("1_knbyo")
+size = Vector2(3500, 1025)
 
 [node name="Node2D" parent="." instance=ExtResource("1_ubiw7")]
+layer_0/tile_data = PackedInt32Array(-65537, 1, 0, -65538, 1, 0, -65539, 1, 2, -196611, 131073, 4, -196610, 262145, 4, -131075, 1, 2, -131074, 393217, 4, -131073, 1, 0, -196609, 196609, 0, -262145, 1, 4, -327681, 1, 4, -524285, 1, 0, -458749, 262145, 3, -589822, 262145, 4, -589823, 262145, 2, -589824, 262145, 4, -524289, 131073, 4, -589821, 262145, 2, -3, 1, 2, 65533, 262145, 5, -2, 1, 0, 65534, 262145, 5, -1, 1, 0, 65535, 262145, 5, -262144, 262145, 4, -327673, 65537, 4, -393208, 1, 2, -327672, 327681, 3, -393207, 458753, 4, -327671, 262145, 3, -393206, 393217, 4, -327670, 262145, 3, -393205, 1, 2, -327669, 327681, 3, -393204, 393217, 4, -327668, 262145, 3, -458753, 1, 2, -393217, 131073, 2, -524288, 393217, 4, -458752, 262145, 3, -196608, 1, 3, -131072, 1, 3, -65536, 1, 3, 0, 65537, 3, -524287, 1, 0, -458751, 262145, 3, -524286, 393217, 4, -458750, 262145, 3, -589820, 262145, 4, -524284, 1, 3, -458748, 327681, 4, -393212, 1, 4, -327676, 1, 5, -327675, 65537, 4, -327674, 65537, 4, -589816, 131073, 4, -524280, 1, 2, -458744, 1, 2, -589815, 262145, 2, -524279, 65537, 2, -458743, 327681, 2, -589814, 262145, 2, -524278, 262145, 4, -458742, 262145, 4, -589813, 262145, 2, -524277, 65537, 2, -458741, 1, 2, -589812, 262145, 2, -524276, 262145, 4, -458740, 262145, 4, -589811, 262145, 4, -524275, 1, 3, -458739, 1, 3, -393203, 1, 3, -327667, 393217, 4)
 
-[node name="Table" parent="." instance=ExtResource("2_legs5")]
-position = Vector2(-616, -1136)
+[node name="Props" type="Node2D" parent="."]
 
-[node name="Table2" parent="." instance=ExtResource("2_legs5")]
-position = Vector2(545, -1939)
+[node name="Table" parent="Props" instance=ExtResource("2_legs5")]
+position = Vector2(-353, -706)
+
+[node name="Table2" parent="Props" instance=ExtResource("2_legs5")]
+position = Vector2(474, -1743)
+
+[node name="Table3" parent="Props" instance=ExtResource("2_legs5")]
+position = Vector2(891, -1740)
+
+[node name="Printer" parent="Props" instance=ExtResource("4_ngwps")]
+position = Vector2(73, -750)
+
+[node name="Skull" parent="Props" instance=ExtResource("5_umioa")]
+position = Vector2(264, -1749)
+
+[node name="Cabinet" parent="Props" instance=ExtResource("6_lge6j")]
+position = Vector2(2171, -1379)
+
+[node name="Cabinet2" parent="Props" instance=ExtResource("6_lge6j")]
+position = Vector2(2087, -1378)
+
+[node name="Cabinet3" parent="Props" instance=ExtResource("6_lge6j")]
+position = Vector2(2593, -1381)
+
+[node name="Cabinet4" parent="Props" instance=ExtResource("6_lge6j")]
+position = Vector2(2592, -1600)
+
+[node name="Cabinet5" parent="Props" instance=ExtResource("6_lge6j")]
+position = Vector2(2210, -1053)
+
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="LightArea" parent="Lights" instance=ExtResource("7_rd3jq")]
+position = Vector2(-104, -352)
+
+[node name="LightArea2" parent="Lights" instance=ExtResource("7_rd3jq")]
+position = Vector2(-2, -1480)
+
+[node name="LightArea3" parent="Lights" instance=ExtResource("7_rd3jq")]
+position = Vector2(748, -1478)
+
+[node name="LightArea4" parent="Lights" instance=ExtResource("7_rd3jq")]
+position = Vector2(1346, -930)
+
+[node name="LightArea5" parent="Lights" instance=ExtResource("7_rd3jq")]
+position = Vector2(1924, -1122)
+
+[node name="LightArea6" parent="Lights" instance=ExtResource("7_rd3jq")]
+position = Vector2(2632, -1080)
+
+[node name="LightArea7" parent="Lights" instance=ExtResource("7_rd3jq")]
+position = Vector2(2262, -1640)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource("6_tjeqf")]
+curve = SubResource("Curve2D_1yk8f")
+
+[node name="Enemy2" parent="Enemies" instance=ExtResource("6_tjeqf")]
+curve = SubResource("Curve2D_xe0ah")
+
+[node name="Potion" parent="." instance=ExtResource("7_qs7nf")]
+position = Vector2(2138, -1550)

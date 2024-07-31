@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bae8sw2ugxn20"]
+[gd_scene load_steps=3 format=3 uid="uid://bae8sw2ugxn20"]
 
 [ext_resource type="Texture2D" uid="uid://ogetgbaq0nmv" path="res://assets/img/Untitled_Artwork-1.png" id="1_yptpx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhu6u"]
+size = Vector2(143, 83)
 
 [node name="Table" type="Area2D"]
 collision_mask = 18
@@ -10,3 +13,5 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_yptpx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -13.5)
+shape = SubResource("RectangleShape2D_fhu6u")

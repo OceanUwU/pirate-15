@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://da5be18eeeliw"]
+[gd_scene load_steps=4 format=3 uid="uid://da5be18eeeliw"]
 
 [ext_resource type="Script" path="res://scripts/potion.gd" id="1_8a5ff"]
+[ext_resource type="Texture2D" uid="uid://b27x0no4fwf5o" path="res://assets/img/potion.png" id="2_l4qpp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sqluk"]
 radius = 30.0
@@ -11,6 +12,8 @@ collision_mask = 16
 script = ExtResource("1_8a5ff")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("2_l4qpp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_sqluk")

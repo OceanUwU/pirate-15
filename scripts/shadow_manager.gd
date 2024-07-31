@@ -2,13 +2,12 @@ extends Node2D
 
 # exports for editor
 @export var fog: Sprite2D
-@export var fogWidth = 2500
-@export var fogHeight = 1500
 @export var LightTexture: CompressedTexture2D
 @export var lightWidth = 300
 @export var lightHeight = 300
 @export var light_arr: Array[Area2D]
 @export var debounce_time = 0.01
+@export var curr_level: Node2D
 
 # debounce counter helper
 var time_since_last_fog_update = 0.0
@@ -19,9 +18,13 @@ var light_offset: Vector2
 var fogTexture: ImageTexture
 var light_rect: Rect2
 var light_diff = 20
+var fogWidth: int
+var fogHeight: int
 
 func _ready():
 	lightImage = LightTexture.get_image()
+	fogWidth = curr_level.size.x
+	fogHeight = curr_level.size.y
 
 func create_light(shape):
 	var light_size = shape.size + light_diff

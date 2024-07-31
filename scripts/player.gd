@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var move_speed : float = 150
+@export var move_speed : float = 180
 @export var starting_direction : Vector2 = Vector2(0,1)
 @export var hp: int
 
@@ -10,6 +10,7 @@ extends CharacterBody2D
 @onready var light_timer = $LightTimer
 
 var in_light_arr = []
+var buffed = false
 
 func _ready():
 	update_animation_parameter(starting_direction)
@@ -18,31 +19,44 @@ func _physics_process(_delta):
 	var input_direction = Vector2(
 		Input.get_action_strength("right") - Input.get_action_strength("left"),
 		Input.get_action_strength("down") - Input.get_action_strength("up") 
-		)
-		
+	)
+	
 	update_animation_parameter(input_direction)
 	
 	velocity = input_direction * move_speed
 	pick_move_state()
 	move_and_slide()
-	#print(light_area.size)
-	
 
 func update_animation_parameter(move_input : Vector2):
+	if move_input != Vector2.ZERO:
+		if buffed:
+			animation_tree.set("parameters/buff_crow_walk_r/blend_position", move_input)
+			animation_tree.set("parameters/buff_crow_idle_r/blend_position", move_input)
+		else:
+			animation_tree.set("parameters/crow_walk_r/blend_position", move_input)
+			animation_tree.set("parameters/crow_idle_r/blend_position", move_input)
 
-	if(move_input != Vector2.ZERO):
-		animation_tree.set("parameters/crow_walk_r/blend_position", move_input)
-		animation_tree.set("parameters/crow_idle_r/blend_position", move_input)
-		
 func pick_move_state():
-	if(velocity != Vector2.ZERO):
-		state_machine.travel("crow_walk_r")
+	if velocity != Vector2.ZERO:
+		if abs(velocity.x) > abs(velocity.y):
+			if velocity.x > 0:
+				state_machine.travel("crow_walk_r")
+			else:
+				state_machine.travel("crow_walk_l")
+		else:
+			if velocity.y > 0:
+				state_machine.travel("crow_walk_d")
+			else:
+				state_machine.travel("crow_walk_u")
 	else:
 		state_machine.travel("crow_idle_r")
 
 func create_light_area():
 	light_area.global_position = global_position
 	light_area.process_mode = Node.PROCESS_MODE_INHERIT
+
+func buff():
+	buffed = true
 
 func _on_light_sense_area_entered(area):
 	print(area)
@@ -57,3 +71,7 @@ func _on_hurtbox_body_entered(body):
 
 func _on_light_timer_timeout():
 	light_area.process_mode = Node.PROCESS_MODE_DISABLED
+
+func _on_buff_hitbox_body_entered(body):
+	pass
+

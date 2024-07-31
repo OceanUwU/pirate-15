@@ -1,5 +1,6 @@
 extends Area2D
 
+signal buff_player
 
 func _on_body_entered(body):
-	pass # Replace with function body.
+	emit_signal("buff_player")

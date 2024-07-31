@@ -341,9 +341,10 @@ _data = {
 radius = 52.0
 height = 228.0
 
-[node name="Enemy" type="Path2D" node_paths=PackedStringArray("character", "path_follow", "animation_player", "raycast", "line", "light_area")]
+[node name="Enemy" type="Path2D" node_paths=PackedStringArray("character", "sprite", "path_follow", "animation_player", "raycast", "line", "light_area")]
 script = ExtResource("1_pmwgf")
 character = NodePath("PathFollow2D/CharacterBody2D")
+sprite = NodePath("PathFollow2D/CharacterBody2D/Sprite2D")
 path_follow = NodePath("PathFollow2D")
 animation_player = NodePath("PathFollow2D/CharacterBody2D/AnimationPlayer")
 roam_speed = 80.0
@@ -356,6 +357,7 @@ light_area = NodePath("PathFollow2D/CharacterBody2D/LightArea")
 rotates = false
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="PathFollow2D"]
+position = Vector2(0, -39)
 collision_layer = 2
 collision_mask = 3
 
@@ -367,7 +369,7 @@ vframes = 9
 frame = 78
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/CharacterBody2D"]
-position = Vector2(1, 68)
+position = Vector2(0, 38)
 shape = SubResource("CapsuleShape2D_fl47w")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="PathFollow2D/CharacterBody2D"]
