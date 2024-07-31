@@ -1,6 +1,6 @@
 class_name Enemy extends Path2D
 
-enum State {WAIT, PATROL, CHASE, FIND, ATTACK}
+enum State {WAIT, PATROL, RETURN, CHASE, FIND, ATTACK}
 enum Direction { UP, UP_RIGHT, DOWN, DOWN_RIGHT }
 
 @export var character: CharacterBody2D
@@ -27,12 +27,12 @@ enum Direction { UP, UP_RIGHT, DOWN, DOWN_RIGHT }
 @onready var line_arr: Array[Line2D] = [line]
 @onready var bullet = preload("res://scenes/bullet.tscn")
 @onready var main = get_tree().get_root().get_node("main")
+@onready var ori_pos = character.global_position
 
 #Light is Area2D, darkness is revealed when light collides with it. 
 var following_path: bool = true
 var direction: String = "u"
 var action: String = "e1_iw"
-var ori_pos = global_position
 
 func _ready() -> void:
 	set_up_raycast()
@@ -42,7 +42,7 @@ func _physics_process(delta: float) -> void:
 	for i in range(raycast_arr.size()):
 		if raycast_arr[i].get_collider() == player:
 			sense()
-		elif !player.in_light_arr:
+		elif !player.in_light_arr and state != State.RETURN:
 			change_state(State.PATROL)
 	match state:
 		State.WAIT:
@@ -52,6 +52,13 @@ func _physics_process(delta: float) -> void:
 				var path_pos_before: Vector2 = path_follow.position
 				path_follow.progress += roam_speed * delta
 				set_dir(path_pos_before.angle_to_point(path_follow.position))
+		State.RETURN:
+			go_back()
+			path_follow.position += character.position
+			character.position = Vector2.ZERO
+			if nav.is_target_reached():
+				path_follow.progress = 0
+				change_state(State.PATROL)
 		State.CHASE:
 			var curr_agent_pos = character.global_position
 			var next_path_pos = nav.get_next_path_position()
@@ -94,9 +101,12 @@ func change_state(new_state):
 	if new_state == State.PATROL and !curve:
 		new_state = State.WAIT
 		#print(new_state)
+	if new_state == State.PATROL and (state == State.CHASE or state == State.ATTACK or state == State.FIND):
+		new_state = State.RETURN
 	if new_state != State.CHASE:
 		chase_timer.stop()
 	state = new_state
+	print(state)
 
 #Check if player is in light or out of light after raycast senses them
 func sense():
@@ -170,11 +180,18 @@ func attack():
 	new_bullet.visible = true
 	new_bullet.z_index = 3
 	add_child(new_bullet)
-	print(character.global_position.y - new_bullet.global_position.y)
 
 func make_path():
 	chase_timer.start()
 	#print(nav.target_position)
+
+func go_back():
+	nav.target_position = ori_pos
+	var curr_agent_pos = character.global_position
+	var next_path_pos = nav.get_next_path_position()
+	character.velocity = curr_agent_pos.direction_to(next_path_pos) * chase_speed
+	character.move_and_slide()
+	set_dir(character.global_position.angle_to_point(ori_pos))
 
 func _on_attack_timer_timeout():
 	attack()

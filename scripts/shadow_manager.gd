@@ -6,9 +6,8 @@ extends Node2D
 @export var lightWidth = 300
 @export var lightHeight = 300
 @export var light_arr: Array[Area2D]
-@export var debounce_time = 0.01
+@export var debounce_time = 0.1
 @export var curr_level: Node2D
-
 # debounce counter helper
 var time_since_last_fog_update = 0.0
 
