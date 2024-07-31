@@ -20,14 +20,11 @@ size = Vector2(3500, 2200)
 [node name="Enemy" parent="Level/Enemies" index="0" node_paths=PackedStringArray("player")]
 player = NodePath("../../../Player")
 
-[node name="PathFollow2D" parent="Level/Enemies/Enemy" index="0"]
-position = Vector2(-100, -1600)
-
 [node name="Enemy2" parent="Level/Enemies" index="1" node_paths=PackedStringArray("player")]
 player = NodePath("../../../Player")
 
 [node name="PathFollow2D" parent="Level/Enemies/Enemy2" index="0"]
-position = Vector2(-100, -700)
+position = Vector2(513, 1143)
 
 [node name="ShadowManager" parent="." node_paths=PackedStringArray("fog", "light_arr", "curr_level") instance=ExtResource("4_edccw")]
 fog = NodePath("../Fog")

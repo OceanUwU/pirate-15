@@ -12,25 +12,25 @@
 
 [sub_resource type="Curve2D" id="Curve2D_1yk8f"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -100, -1600, 0, 0, 0, 0, -100, -1350, 0, 0, 0, 0, 700, -1350, 0, 0, 0, 0, 700, -1600, 0, 0, 0, 0, 700, -1350, 0, 0, 0, 0, -100, -1350, 0, 0, 0, 0, -100, -1600)
+"points": PackedVector2Array(0, 0, 0, 0, 513, 243, 0, 0, 0, 0, 513, 493, 0, 0, 0, 0, 1313, 493, 0, 0, 0, 0, 1313, 243, 0, 0, 0, 0, 1313, 493, 0, 0, 0, 0, 513, 493, 0, 0, 0, 0, 513, 243)
 }
 point_count = 7
 
 [sub_resource type="Curve2D" id="Curve2D_xe0ah"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -100, -700, 0, 0, 0, 0, -100, -350, 0, 0, 0, 0, -500, -350, 0, 0, 0, 0, -100, -350, 0, 0, 0, 0, -100, -700)
+"points": PackedVector2Array(0, 0, 0, 0, 513, 1143, 0, 0, 0, 0, 513, 1493, 0, 0, 0, 0, 113, 1493, 0, 0, 0, 0, 513, 1493, 0, 0, 0, 0, 513, 1143)
 }
 point_count = 5
 
 [node name="Level" type="Node2D"]
-position = Vector2(613, 1843)
 script = ExtResource("1_knbyo")
 size = Vector2(3500, 1025)
 
 [node name="Node2D" parent="." instance=ExtResource("1_ubiw7")]
-layer_0/tile_data = PackedInt32Array(-65537, 1, 0, -65538, 1, 0, -65539, 1, 2, -196611, 131073, 4, -196610, 262145, 4, -131075, 1, 2, -131074, 393217, 4, -131073, 1, 0, -196609, 196609, 0, -262145, 1, 4, -327681, 1, 4, -524285, 1, 0, -458749, 262145, 3, -589822, 262145, 4, -589823, 262145, 2, -589824, 262145, 4, -524289, 131073, 4, -589821, 262145, 2, -3, 1, 2, 65533, 262145, 5, -2, 1, 0, 65534, 262145, 5, -1, 1, 0, 65535, 262145, 5, -262144, 262145, 4, -327673, 65537, 4, -393208, 1, 2, -327672, 327681, 3, -393207, 458753, 4, -327671, 262145, 3, -393206, 393217, 4, -327670, 262145, 3, -393205, 1, 2, -327669, 327681, 3, -393204, 393217, 4, -327668, 262145, 3, -458753, 1, 2, -393217, 131073, 2, -524288, 393217, 4, -458752, 262145, 3, -196608, 1, 3, -131072, 1, 3, -65536, 1, 3, 0, 65537, 3, -524287, 1, 0, -458751, 262145, 3, -524286, 393217, 4, -458750, 262145, 3, -589820, 262145, 4, -524284, 1, 3, -458748, 327681, 4, -393212, 1, 4, -327676, 1, 5, -327675, 65537, 4, -327674, 65537, 4, -589816, 131073, 4, -524280, 1, 2, -458744, 1, 2, -589815, 262145, 2, -524279, 65537, 2, -458743, 327681, 2, -589814, 262145, 2, -524278, 262145, 4, -458742, 262145, 4, -589813, 262145, 2, -524277, 65537, 2, -458741, 1, 2, -589812, 262145, 2, -524276, 262145, 4, -458740, 262145, 4, -589811, 262145, 4, -524275, 1, 3, -458739, 1, 3, -393203, 1, 3, -327667, 393217, 4)
+layer_0/tile_data = PackedInt32Array(5, 262145, 4, 4, 262145, 2, 3, 262145, 4, 2, 131073, 4, 65542, 1, 0, 6, 262145, 2, 65538, 1, 2, 65539, 393217, 4, 65540, 1, 0, 65541, 393217, 4, 327680, 131073, 4, 393216, 1, 2, 458752, 1, 2, 524288, 1, 2, 589824, 262145, 5, 327681, 262145, 4, 393217, 393217, 4, 458753, 1, 0, 524289, 1, 0, 589825, 262145, 5, 131074, 131073, 2, 196610, 1, 4, 262146, 1, 4, 327682, 196609, 0, 393218, 1, 0, 458754, 1, 0, 524290, 1, 0, 589826, 262145, 5, 131075, 262145, 3, 327683, 262145, 4, 393219, 1, 3, 458755, 1, 3, 524291, 1, 3, 589827, 65537, 3, 131076, 262145, 3, 131077, 262145, 3, 131078, 262145, 3, 7, 262145, 4, 65543, 1, 3, 131079, 327681, 4, 196615, 1, 4, 262151, 1, 5, 262152, 65537, 4, 262153, 65537, 4, 262154, 65537, 4, 11, 131073, 4, 65547, 1, 2, 131083, 1, 2, 196619, 1, 2, 262155, 327681, 3, 12, 262145, 2, 65548, 65537, 2, 131084, 327681, 2, 196620, 458753, 4, 262156, 262145, 3, 13, 262145, 2, 65549, 262145, 4, 131085, 262145, 4, 196621, 393217, 4, 262157, 262145, 3, 14, 262145, 2, 65550, 65537, 2, 131086, 1, 2, 196622, 1, 2, 262158, 327681, 3, 15, 262145, 2, 65551, 262145, 4, 131087, 262145, 4, 196623, 393217, 4, 262159, 262145, 3, 16, 262145, 4, 65552, 1, 3, 131088, 1, 3, 196624, 1, 3, 262160, 393217, 4)
 
 [node name="Props" type="Node2D" parent="."]
+position = Vector2(613, 1843)
 
 [node name="Table" parent="Props" instance=ExtResource("2_legs5")]
 position = Vector2(-353, -706)
@@ -65,33 +65,38 @@ position = Vector2(2210, -1053)
 [node name="Lights" type="Node2D" parent="."]
 
 [node name="LightArea" parent="Lights" instance=ExtResource("7_rd3jq")]
-position = Vector2(-104, -352)
+position = Vector2(509, 1491)
 
 [node name="LightArea2" parent="Lights" instance=ExtResource("7_rd3jq")]
-position = Vector2(-2, -1480)
+position = Vector2(611, 363)
 
 [node name="LightArea3" parent="Lights" instance=ExtResource("7_rd3jq")]
-position = Vector2(748, -1478)
+position = Vector2(1361, 365)
 
 [node name="LightArea4" parent="Lights" instance=ExtResource("7_rd3jq")]
-position = Vector2(1346, -930)
+position = Vector2(1959, 913)
 
 [node name="LightArea5" parent="Lights" instance=ExtResource("7_rd3jq")]
-position = Vector2(1924, -1122)
+position = Vector2(2537, 721)
 
 [node name="LightArea6" parent="Lights" instance=ExtResource("7_rd3jq")]
-position = Vector2(2632, -1080)
+position = Vector2(3245, 763)
 
 [node name="LightArea7" parent="Lights" instance=ExtResource("7_rd3jq")]
-position = Vector2(2262, -1640)
+position = Vector2(2875, 203)
 
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Enemy" parent="Enemies" instance=ExtResource("6_tjeqf")]
 curve = SubResource("Curve2D_1yk8f")
 
+[node name="PathFollow2D" parent="Enemies/Enemy" index="0"]
+position = Vector2(513, 243)
+
 [node name="Enemy2" parent="Enemies" instance=ExtResource("6_tjeqf")]
 curve = SubResource("Curve2D_xe0ah")
 
 [node name="Potion" parent="." instance=ExtResource("7_qs7nf")]
-position = Vector2(2138, -1550)
+position = Vector2(2754, 272)
+
+[editable path="Enemies/Enemy"]

@@ -168,8 +168,9 @@ func attack():
 	new_bullet.global_position = character.global_position
 	new_bullet.rotation = player.global_position.angle_to_point(character.global_position)
 	new_bullet.visible = true
-	new_bullet.z_index = 1
+	new_bullet.z_index = 3
 	add_child(new_bullet)
+	print(character.global_position.y - new_bullet.global_position.y)
 
 func make_path():
 	chase_timer.start()
