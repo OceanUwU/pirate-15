@@ -51,6 +51,10 @@ position = Vector2(139, 454)
 [node name="Player" parent="." instance=ExtResource("6_q7otw")]
 position = Vector2(165, 126)
 
+[node name="AnimationTree" parent="Player" index="2"]
+parameters/idle/blend_position = Vector2(0, 0)
+parameters/walk/blend_position = Vector2(0, 0)
+
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
 [node name="LightArea" parent="." instance=ExtResource("8_plrqj")]
